@@ -13,6 +13,19 @@ public class PlayerAction
     public void Move(Transform transform)
     {
         player.Components.RigidBody.velocity = new Vector2(player.Stats.Direction.x * player.Stats.Speed * Time.deltaTime, player.Stats.Direction.y);
+
+        if(player.Stats.Direction.x != 0)
+        {
+            transform.localScale = new Vector3(player.Stats.Direction.x < 0 ? -1 : 1, 1 ,1);
+            player.Components.Animator.TryPlayAnimation("Body_Walk");
+            player.Components.Animator.TryPlayAnimation("Legs_Walk");
+        }
+
+        else if (player.Components.RigidBody.velocity == Vector2.zero)
+        {
+            player.Components.Animator.TryPlayAnimation("Body_Idle");
+            player.Components.Animator.TryPlayAnimation("Legs_Idle");
+        }
     }
 
 }

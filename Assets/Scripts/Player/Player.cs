@@ -29,16 +29,24 @@ public class Player : MonoBehaviour
             return stats;
         }
     }   
-    private void Awake()
-    {
-        actions = new PlayerAction(this);
-        utilities= new PlayerUtilities(this);
-        stats.Speed = stats.WalkSpeed;
-    }
+
     // Start is called before the first frame update
     private void Start()
     {
-        
+        actions = new PlayerAction(this);
+        utilities = new PlayerUtilities(this);
+        stats.Speed = stats.WalkSpeed;
+        AnyStateAnimation[] animations = new AnyStateAnimation[]
+        {
+            new AnyStateAnimation(RIG.BODY, "Body_Idle"),
+            new AnyStateAnimation(RIG.BODY, "Body_Walk"),
+
+            new AnyStateAnimation(RIG.LEGS, "Legs_Idle"),
+            new AnyStateAnimation(RIG.LEGS, "Legs_Walk"),
+
+         };
+
+        components.Animator.AddAnimations(animations);
     }
 
     // Update is called once per frame
