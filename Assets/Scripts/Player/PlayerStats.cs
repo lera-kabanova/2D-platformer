@@ -12,6 +12,9 @@ public class PlayerStats
     public float Speed { get; set; }
 
     [SerializeField]
+    private float jumpForce;
+
+    [SerializeField]
     private float walkSpeed;
 
     [SerializeField]
@@ -20,5 +23,10 @@ public class PlayerStats
     public float WalkSpeed
     {
         get { return walkSpeed; } 
+    }
+
+    public float JumpForce
+    {
+        get { return jumpForce; }
     }
 }

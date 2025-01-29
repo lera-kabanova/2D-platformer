@@ -30,6 +30,14 @@ public class Player : MonoBehaviour
         }
     }   
 
+    public PlayerAction Actions
+    {
+        get
+        {
+            return actions;
+        }
+    }
+
     // Start is called before the first frame update
     private void Start()
     {

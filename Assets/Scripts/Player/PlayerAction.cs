@@ -12,7 +12,7 @@ public class PlayerAction
     }
     public void Move(Transform transform)
     {
-        player.Components.RigidBody.velocity = new Vector2(player.Stats.Direction.x * player.Stats.Speed * Time.deltaTime, player.Stats.Direction.y);
+        player.Components.RigidBody.velocity = new Vector2(player.Stats.Direction.x * player.Stats.Speed * Time.deltaTime, player.Components.RigidBody.velocity.y);
 
         if(player.Stats.Direction.x != 0)
         {
@@ -28,4 +28,8 @@ public class PlayerAction
         }
     }
 
+    public void Jump()
+    {
+        player.Components.RigidBody.AddForce(new Vector2(0, player.Stats.JumpForce), ForceMode2D.Impulse);
+    }
 }
