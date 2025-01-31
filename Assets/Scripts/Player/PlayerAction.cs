@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerAction 
 {
     private Player player;
@@ -30,6 +31,10 @@ public class PlayerAction
 
     public void Jump()
     {
-        player.Components.RigidBody.AddForce(new Vector2(0, player.Stats.JumpForce), ForceMode2D.Impulse);
+        if (player.Utilities.IsGrounded())
+        {
+            player.Components.RigidBody.AddForce(new Vector2(0, player.Stats.JumpForce), ForceMode2D.Impulse);
+        }
+
     }
 }

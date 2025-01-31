@@ -11,6 +11,11 @@ public class PlayerComponents
     [SerializeField]
     private AnyStateAnimator animator;
 
+    [SerializeField]
+    private Collider2D collider;
+
+    [SerializeField]
+    private LayerMask groundLayer;
     public Rigidbody2D RigidBody
     {
         get { return rigidBody; }
@@ -19,5 +24,15 @@ public class PlayerComponents
     public AnyStateAnimator Animator
     {
         get { return animator; }
+    }
+
+    public LayerMask GroundLayer
+    {
+        get { return groundLayer; }     
+    }
+
+    public Collider2D Collider
+    {
+        get { return collider; }
     }
 }

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
      
     private PlayerReferences references;
 
+    [SerializeField]
     private PlayerUtilities utilities;
 
     private PlayerAction actions;
@@ -35,6 +36,14 @@ public class Player : MonoBehaviour
         get
         {
             return actions;
+        }
+    }
+
+    public PlayerUtilities Utilities
+    {
+        get
+        {
+            return utilities;
         }
     }
 
