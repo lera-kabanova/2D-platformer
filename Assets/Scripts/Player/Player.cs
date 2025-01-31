@@ -57,9 +57,11 @@ public class Player : MonoBehaviour
         {
             new AnyStateAnimation(RIG.BODY, "Body_Idle"),
             new AnyStateAnimation(RIG.BODY, "Body_Walk"),
+            new AnyStateAnimation(RIG.BODY, "Body_Jump"),
 
             new AnyStateAnimation(RIG.LEGS, "Legs_Idle"),
             new AnyStateAnimation(RIG.LEGS, "Legs_Walk"),
+            new AnyStateAnimation(RIG.LEGS, "Legs_Jump"),
 
          };
 

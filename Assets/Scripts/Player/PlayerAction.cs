@@ -34,6 +34,8 @@ public class PlayerAction
         if (player.Utilities.IsGrounded())
         {
             player.Components.RigidBody.AddForce(new Vector2(0, player.Stats.JumpForce), ForceMode2D.Impulse);
+            player.Components.Animator.TryPlayAnimation("Legs_Jump");
+            player.Components.Animator.TryPlayAnimation("Body_Jump");
         }
 
     }
