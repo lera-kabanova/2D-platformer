@@ -51,7 +51,7 @@ public class PlayerUtilities
         }
     }
 
-    public bool IsFalling()
+    private bool IsFalling()
     {
         if(player.Components.RigidBody.velocity.y < 0 && !IsGrounded())
         {
