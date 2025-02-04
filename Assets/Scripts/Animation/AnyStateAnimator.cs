@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using UnityEngine;
 
 public class AnyStateAnimator : MonoBehaviour
@@ -51,7 +52,7 @@ public class AnyStateAnimator : MonoBehaviour
                 currentAnimation = newAnimation;
             }
 
-            else if (currentAnimation != newAnimation)
+            else if (currentAnimation != newAnimation && !animations[newAnimation].HigherPrio.Contains(currentAnimation) || !animations[currentAnimation].Active)
             {
                 animations[currentAnimation].Active = false;
                 animations[newAnimation].Active = true;
@@ -67,5 +68,10 @@ public class AnyStateAnimator : MonoBehaviour
         {
             animator.SetBool(key, animations[key].Active);
         }
+    }
+
+    public void OnAnimationDone(string animation)
+    {
+        animations[animation].Active = false;
     }
 }

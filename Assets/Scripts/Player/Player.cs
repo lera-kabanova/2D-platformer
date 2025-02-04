@@ -55,15 +55,17 @@ public class Player : MonoBehaviour
         stats.Speed = stats.WalkSpeed;
         AnyStateAnimation[] animations = new AnyStateAnimation[]
         {
-            new AnyStateAnimation(RIG.BODY, "Body_Idle"),
-            new AnyStateAnimation(RIG.BODY, "Body_Walk"),
+            new AnyStateAnimation(RIG.BODY, "Body_Idle", "Body_Attack"),
+            new AnyStateAnimation(RIG.BODY, "Body_Walk", "Body_Attack","Body_Jump"),
             new AnyStateAnimation(RIG.BODY, "Body_Jump"),
             new AnyStateAnimation(RIG.BODY, "Body_Fall"),
+            new AnyStateAnimation(RIG.BODY, "Body_Attack"),
 
-            new AnyStateAnimation(RIG.LEGS, "Legs_Idle"),
-            new AnyStateAnimation(RIG.LEGS, "Legs_Walk"),
+            new AnyStateAnimation(RIG.LEGS, "Legs_Idle","Legs_Attack"),
+            new AnyStateAnimation(RIG.LEGS, "Legs_Walk", "Legs_Jump"),
             new AnyStateAnimation(RIG.LEGS, "Legs_Jump"),
             new AnyStateAnimation(RIG.LEGS, "Legs_Fall"),
+            new AnyStateAnimation(RIG.LEGS, "Legs_Attack"),
 
          };
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -38,5 +39,11 @@ public class PlayerAction
             player.Components.Animator.TryPlayAnimation("Body_Jump");
         }
 
+    }
+
+    public void Attack()
+    {
+        player.Components.Animator.TryPlayAnimation("Legs_Attack");
+        player.Components.Animator.TryPlayAnimation("Body_Attack");
     }
 }
