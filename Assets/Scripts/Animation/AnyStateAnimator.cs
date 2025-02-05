@@ -62,6 +62,10 @@ public class AnyStateAnimator : MonoBehaviour
         Animate();
     }
 
+    public void SetWeapon(float weapon)
+    {
+        animator.SetFloat("Weapon", weapon);
+    }
     private void Animate()
     {
         foreach(string key in animations.Keys)

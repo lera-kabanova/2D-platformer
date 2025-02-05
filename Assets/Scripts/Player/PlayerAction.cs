@@ -51,6 +51,7 @@ public class PlayerAction
     public void TrySwapWeapon(WEAPON weapon)
     {
         player.Stats.Weapon = weapon;
+        player.Components.Animator.SetWeapon((int)player.Stats.Weapon);
         SwapWeapon();
     }
 
