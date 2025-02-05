@@ -20,6 +20,7 @@ public class PlayerStats
     [SerializeField]
     private float runSpeed;
 
+    private WEAPON weapon;
     public float WalkSpeed
     {
         get { return walkSpeed; } 
@@ -29,4 +30,6 @@ public class PlayerStats
     {
         get { return jumpForce; }
     }
+
+    public WEAPON Weapon { get => weapon; set => weapon = value; }
 }

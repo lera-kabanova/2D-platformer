@@ -6,9 +6,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private PlayerStats stats;
+
     [SerializeField]
     private PlayerComponents components;
-     
+
+    [SerializeField]
     private PlayerReferences references;
 
     [SerializeField]
@@ -23,6 +25,15 @@ public class Player : MonoBehaviour
             return components; 
         }
     }
+
+    public PlayerReferences References
+    {
+        get
+        {
+            return references;
+        }
+    }
+
     public PlayerStats Stats
     {
         get

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -45,5 +46,24 @@ public class PlayerAction
     {
         player.Components.Animator.TryPlayAnimation("Legs_Attack");
         player.Components.Animator.TryPlayAnimation("Body_Attack");
+    }
+
+    public void TrySwapWeapon(WEAPON weapon)
+    {
+        player.Stats.Weapon = weapon;
+        SwapWeapon();
+    }
+
+    public void SwapWeapon()
+    {
+        for(int i = 1; i < player.References.WeaponObjects.Length; i++)
+        {
+            player.References.WeaponObjects[i].SetActive(false);
+        }
+
+        if(player.Stats.Weapon > 0)
+        {
+            player.References.WeaponObjects[(int)player.Stats.Weapon].SetActive(true);
+        }
     }
 }

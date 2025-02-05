@@ -16,6 +16,6 @@ public class AnyStateAnimation
     {
         this.AnimationRig = rig;
         this.Name = name;
-        this.HigherPrio = higherPrio;
+        this.HigherPrio = higherPrio; 
     }
 }
