@@ -32,4 +32,6 @@ public class PlayerStats
     }
 
     public WEAPON Weapon { get => weapon; set => weapon = value; }
+
+    public Dictionary<WEAPON, bool> Weapons { get; set; } = new Dictionary<WEAPON, bool>();
 }

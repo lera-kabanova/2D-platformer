@@ -50,9 +50,13 @@ public class PlayerAction
 
     public void TrySwapWeapon(WEAPON weapon)
     {
-        player.Stats.Weapon = weapon;
-        player.Components.Animator.SetWeapon((int)player.Stats.Weapon);
-        SwapWeapon();
+        if (player.Stats.Weapons[weapon] == true)
+        {
+            player.Stats.Weapon = weapon;
+            player.Components.Animator.SetWeapon((int)player.Stats.Weapon);
+            SwapWeapon();
+        }
+
     }
 
     public void SwapWeapon()
@@ -66,5 +70,18 @@ public class PlayerAction
         {
             player.References.WeaponObjects[(int)player.Stats.Weapon].SetActive(true);
         }
+    }
+
+    public void Collide(Collider2D collision)
+    {
+        if (collision.tag == "Collectable")
+        {
+            collision.GetComponent<ICollectable>().Collect();
+        }
+    }
+
+    internal void PickUpWeapon(WEAPON weapon)
+    {
+        player.Stats.Weapons[weapon] = true;
     }
 }
