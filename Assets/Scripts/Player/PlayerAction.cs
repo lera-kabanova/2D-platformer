@@ -78,8 +78,19 @@ public class PlayerAction
         {
             collision.GetComponent<ICollectable>().Collect();
         }
+        
     }
+    public void Shoot(string animation)
+    {
+        if (animation == "Shoot")
+        {
+            GameObject go = GameObject.Instantiate(player.References.ProjectilePrefab, player.References.GunBarrel.position, Quaternion.identity);
 
+            Vector3 direction = new Vector3(player.transform.localScale.x, 0);
+
+            go.GetComponent<Projectile>().Setup(direction);
+        } 
+    }
     internal void PickUpWeapon(WEAPON weapon)
     {
         player.Stats.Weapons[weapon] = true;

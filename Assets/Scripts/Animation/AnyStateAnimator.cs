@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using UnityEngine;
 
+public delegate void AnimationTriggerEvent(string animation);
+
 public class AnyStateAnimator : MonoBehaviour
 {
     private Animator animator;
@@ -11,6 +13,8 @@ public class AnyStateAnimator : MonoBehaviour
     private Dictionary<string, AnyStateAnimation> animations = new Dictionary<string, AnyStateAnimation>();
 
     private string currentAnimationLegs = string.Empty;
+
+    public AnimationTriggerEvent AnimationTriggerEvent { get; set; }
 
     private string currentAnimationBody = string.Empty;
 
@@ -77,5 +81,15 @@ public class AnyStateAnimator : MonoBehaviour
     public void OnAnimationDone(string animation)
     {
         animations[animation].Active = false;
+    }
+
+    public void OnAnimationTrigger(string animation)
+    {
+        if (AnimationTriggerEvent != null)
+        {
+            AnimationTriggerEvent.Invoke(animation);
+        }
+
+
     }
 }

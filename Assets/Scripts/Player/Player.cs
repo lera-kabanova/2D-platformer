@@ -79,9 +79,14 @@ public class Player : MonoBehaviour
             new AnyStateAnimation(RIG.LEGS, "Legs_Attack"),
 
          };
+
+        Components.Animator.AnimationTriggerEvent += Actions.Shoot;
+
         stats.Weapons.Add(WEAPON.FISTS, true);
         stats.Weapons.Add(WEAPON.GUN, false);
-        stats.Weapons.Add(WEAPON.SWORD, false); 
+        stats.Weapons.Add(WEAPON.SWORD, false);
+
+        UIManager.Instance.AddLife(stats.Lives);
 
         components.Animator.AddAnimations(animations);
     }

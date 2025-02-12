@@ -20,6 +20,9 @@ public class PlayerStats
     [SerializeField]
     private float runSpeed;
 
+    [SerializeField]
+    private int lives;
+
     private WEAPON weapon;
     public float WalkSpeed
     {
@@ -34,4 +37,5 @@ public class PlayerStats
     public WEAPON Weapon { get => weapon; set => weapon = value; }
 
     public Dictionary<WEAPON, bool> Weapons { get; set; } = new Dictionary<WEAPON, bool>();
+    public int Lives { get => lives; set => lives = value; }
 }
