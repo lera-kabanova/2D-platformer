@@ -95,4 +95,9 @@ public class PlayerAction
     {
         player.Stats.Weapons[weapon] = true;
     }
+
+    public void TakeHit()
+    {
+        UIManager.Instance.RemoveLife();
+    }
 }
