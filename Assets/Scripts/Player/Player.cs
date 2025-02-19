@@ -64,19 +64,23 @@ public class Player : MonoBehaviour
         actions = new PlayerAction(this);
         utilities = new PlayerUtilities(this);
         stats.Speed = stats.WalkSpeed;
+        stats.IsImmortal = false;
         AnyStateAnimation[] animations = new AnyStateAnimation[]
         {
-            new AnyStateAnimation(RIG.BODY, "Body_Idle", "Body_Attack"),
-            new AnyStateAnimation(RIG.BODY, "Body_Walk", "Body_Attack","Body_Jump"),
-            new AnyStateAnimation(RIG.BODY, "Body_Jump"),
-            new AnyStateAnimation(RIG.BODY, "Body_Fall"),
-            new AnyStateAnimation(RIG.BODY, "Body_Attack"),
+            new AnyStateAnimation(RIG.BODY, "Body_Idle", "Body_Attack", "Body_Hurt"),
+            new AnyStateAnimation(RIG.BODY, "Body_Walk", "Body_Attack","Body_Jump","Body_Hurt"),
+            new AnyStateAnimation(RIG.BODY, "Body_Jump","Body_Hurt"),
+            new AnyStateAnimation(RIG.BODY, "Body_Fall", "Body_Hurt"),
+            new AnyStateAnimation(RIG.BODY, "Body_Attack", "Body_Hurt"),
+            new AnyStateAnimation(RIG.BODY, "Body_Hurt","Body_Die"),
+             new AnyStateAnimation(RIG.BODY, "Body_Die"),
 
             new AnyStateAnimation(RIG.LEGS, "Legs_Idle","Legs_Attack"),
             new AnyStateAnimation(RIG.LEGS, "Legs_Walk", "Legs_Jump"),
             new AnyStateAnimation(RIG.LEGS, "Legs_Jump"),
             new AnyStateAnimation(RIG.LEGS, "Legs_Fall"),
             new AnyStateAnimation(RIG.LEGS, "Legs_Attack"),
+            new AnyStateAnimation(RIG.LEGS, "Legs_Die"),
 
          };
 
@@ -94,13 +98,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        utilities.HandleInput();
-        utilities.HandleAir();
+        if (stats.Alive)
+        {
+            Utilities.HandleInput();
+            utilities.HandleAir();
+        }
+
     }
 
     private void FixedUpdate()
     {
-        actions.Move(transform);
+        if (stats.Alive)
+        {
+            Actions.Move(transform);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

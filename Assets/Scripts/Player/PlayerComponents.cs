@@ -16,6 +16,9 @@ public class PlayerComponents
 
     [SerializeField]
     private LayerMask groundLayer;
+
+    [SerializeField]
+    private SpriteRenderer[] spriteRenderers;
     public Rigidbody2D RigidBody
     {
         get { return rigidBody; }
@@ -35,4 +38,6 @@ public class PlayerComponents
     {
         get { return collider; }
     }
+
+    public SpriteRenderer[] SpriteRenderers { get => spriteRenderers; set => spriteRenderers = value; }
 }

@@ -98,6 +98,54 @@ public class PlayerAction
 
     public void TakeHit()
     {
-        UIManager.Instance.RemoveLife();
+        if (!player.Stats.IsImmortal)
+        {
+            if (player.Stats.Lives > 0)
+            {
+
+                UIManager.Instance.RemoveLife();
+                player.Stats.Lives--;
+                player.Components.Animator.TryPlayAnimation("Body_Hurt");
+            }
+            if (player.Stats.Alive)
+            {
+                player.StartCoroutine(Immortality());
+            }
+            if (!player.Stats.Alive)
+            {
+                player.Components.Animator.TryPlayAnimation("Body_Die");
+                player.Components.Animator.TryPlayAnimation("Legs_Die");
+            }
+        }
+
+
+    }
+
+    private IEnumerator Blink()
+    {
+        while (player.Stats.IsImmortal)
+        {
+            for (int i = 0; i < player.Components.SpriteRenderers.Length; i++)
+            {
+                player.Components.SpriteRenderers[i].enabled = false;
+            }
+
+            yield return new WaitForSeconds(.15f);
+
+            for (int i = 0; i < player.Components.SpriteRenderers.Length; i++)
+            {
+                player.Components.SpriteRenderers[i].enabled = true;
+            }
+            yield return new WaitForSeconds(.15f);
+
+        }
+    }
+
+    private IEnumerator Immortality()
+    {
+        player.Stats.IsImmortal = true;
+        player.StartCoroutine(Blink());
+        yield return new WaitForSeconds(player.Stats.ImmortalityTime);
+        player.Stats.IsImmortal = false;
     }
 }
