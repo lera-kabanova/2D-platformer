@@ -12,6 +12,16 @@ public class Enemy : MonoBehaviour, ICollisionHandler
 
     [SerializeField]
     private Transform mouth;
+
+    private Transform target;
+
+    [SerializeField]
+    private float attackCooldown;
+
+    private bool canAttack = true;
+
+    private float timeSinceAttack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,16 +31,11 @@ public class Enemy : MonoBehaviour, ICollisionHandler
     // Update is called once per frame
     void Update()
     {
-        
+        LookAtTarget();
+        Attack();
     }
 
-    public void CollisionEnter(string colliderName, GameObject other)
-    {
-        if (colliderName == "DamageArea" && other.tag == "Player")
-        {
-            other.GetComponent<Player>().Actions.TakeHit();
-        }
-    }
+
 
     public void StopAttack()
     {
@@ -45,5 +50,59 @@ public class Enemy : MonoBehaviour, ICollisionHandler
         Vector3 direction = new Vector3(transform.localScale.x, 0);
 
         go.GetComponent<Projectile>().Setup(direction);
+    }
+
+    private void Attack()
+    {
+        if (!canAttack)
+        {
+            timeSinceAttack += Time.deltaTime;
+        }
+        if (timeSinceAttack >= attackCooldown)
+        {
+            canAttack = true;
+        }
+        if (canAttack && target != null && Mathf.Abs(target.transform.position.y - transform.position.y) <= 1f)
+        {
+            canAttack = false;
+            timeSinceAttack = 0;
+            animator.SetBool("Attack", true);
+        }
+    }
+
+    private void LookAtTarget()
+    {
+        if (target != null)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = target.transform.position.x < transform.position.x ? -1 : 1;
+
+            transform.localScale = scale;
+        }
+    }
+
+    public void CollisionEnter(string colliderName, GameObject other)
+    {
+        if (colliderName == "DamageArea" && other.tag == "Player")
+        {
+            other.GetComponent<Player>().Actions.TakeHit();
+        }
+
+        if (colliderName == "Sight" && other.tag == "Player")
+        {
+            if (target == null)
+            {
+                this.target = other.transform;
+            }
+
+        }
+    }
+
+    public void CollisionExit(string colliderName, GameObject other)
+    {
+        if (colliderName == "Sight" && other.tag == "Player")
+        {
+            target = null;
+        }
     }
 }

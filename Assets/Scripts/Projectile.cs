@@ -21,7 +21,17 @@ public class Projectile : MonoBehaviour
     public void Setup(Vector2 direction)
     {
         this.direction = direction;
+        GetComponent<SpriteRenderer>().flipX = direction.x == 1 ? false : true;
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.tag == targetTag)
+    //    {
+    //        collision.GetComponentInParent<IHitable>().TakeHit();
+    //        Destroy(gameObject);
+    //    }
+    //}
 
     public void OnBecameInvisible()
     {
