@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, ICollisionHandler
 {
+    [SerializeField]
+    private Animator animator;
 
+    [SerializeField]
+    private GameObject fireBallPrefab;
+
+    [SerializeField]
+    private Transform mouth;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +30,20 @@ public class Enemy : MonoBehaviour, ICollisionHandler
         {
             other.GetComponent<Player>().Actions.TakeHit();
         }
+    }
+
+    public void StopAttack()
+    {
+        animator.SetBool("Attack", false);
+    }
+
+
+    public void Shoot()
+    {
+        GameObject go = Instantiate(fireBallPrefab, mouth.position, Quaternion.identity);
+
+        Vector3 direction = new Vector3(transform.localScale.x, 0);
+
+        go.GetComponent<Projectile>().Setup(direction);
     }
 }
