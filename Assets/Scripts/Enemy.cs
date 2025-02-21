@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class Enemy : MonoBehaviour, ICollisionHandler
+public class Enemy : MonoBehaviour, ICollisionHandler, IHitable
 {
     [SerializeField]
     private Animator animator;
@@ -13,10 +14,18 @@ public class Enemy : MonoBehaviour, ICollisionHandler
     [SerializeField]
     private Transform mouth;
 
+    [SerializeField]
+    private GameObject head;
+
     private Transform target;
 
     [SerializeField]
     private float attackCooldown;
+
+    [SerializeField]
+    private Rigidbody2D rigidBody;
+
+    private bool alive = true;
 
     private bool canAttack = true;
 
@@ -31,8 +40,11 @@ public class Enemy : MonoBehaviour, ICollisionHandler
     // Update is called once per frame
     void Update()
     {
-        LookAtTarget();
-        Attack();
+        if (alive)
+        {
+            LookAtTarget();
+            Attack();
+        }
     }
 
 
@@ -104,5 +116,20 @@ public class Enemy : MonoBehaviour, ICollisionHandler
         {
             target = null;
         }
+    }
+
+    private void Die()
+    {
+        alive = false;
+        rigidBody.gravityScale = 1;
+        animator.SetTrigger("Die");
+        head.SetActive(false);
+        GetComponent<PIngPong>().enabled = false;
+
+    }
+
+    public void TakeHit()
+    {
+        Die();
     }
 }

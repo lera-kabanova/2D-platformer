@@ -24,17 +24,12 @@ public class Projectile : MonoBehaviour
         GetComponent<SpriteRenderer>().flipX = direction.x == 1 ? false : true;
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.tag == targetTag)
-    //    {
-    //        collision.GetComponentInParent<IHitable>().TakeHit();
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-    public void OnBecameInvisible()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (collision.tag == targetTag)
+        {
+            collision.GetComponentInParent<IHitable>().TakeHit();
+            Destroy(gameObject);
+        }
     }
 }
